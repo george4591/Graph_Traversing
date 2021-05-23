@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 /**
- *  @brief A stacl (@b LIFO type)<br>
+ *  @brief A stack (@b LIFO type)<br>
  *  See <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">wiki</a> for more help.
  */
 struct Stack {

@@ -20,7 +20,7 @@ struct Graph {
     int **adjMatrix;
     /**
      * @brief This is the size of the graph
-     * It is just the number of edges it has
+     * It is just the number of vertices it has
      */
     int size;
 };
@@ -41,19 +41,19 @@ void createGraph(Graph &graph, int num_vertices) {
 }
 
 /**
-    * @brief Adds a vertex to the graph
+    * @brief Adds an edge to the graph
     * @param v - first edge of the vertex
     * @param u - second edge of the vertex
 */
-void addVertex(Graph &graph, int v, int u) {
-    // if the the edge numbers are less than the size of the graph
+void addEdge(Graph &graph, int v, int u) {
+    // if the the vertex numbers are less than the size of the graph
     // then that means that is a correct vertex and we can add it to the adjacency matrix
     if (v < graph.size && u < graph.size) {
         graph.adjMatrix[v][u] = 1;
         graph.adjMatrix[u][v] = 1;
     }
     else {
-        printf("\nCannot add a vertex that has edges with a number bigger than the number of edges the graph has.");
+        printf("\nCannot add an edge that has vertices with a number bigger than the number of vertices the graph has.");
     }
 }
 
@@ -75,22 +75,22 @@ void bfs(Graph &graph, int start) {
     // While the queue is not empty
     while (!isQueueEmpty(q)) {
         // We're getting the edge from the queue and printing it
-        int edge = getElementFromQueue(q);
-        printf("%d ", edge);
+        int vertex = getElementFromQueue(q);
+        printf("%d ", vertex);
 
-        // For every edge that the graph has
-        for (int currentEdge = q.first; currentEdge < graph.size; currentEdge++) {
-            // We're checking if there is a vertex between the edge got from the queue and the current edge
-            // And if there is a vertex then we're checking if the current edge has already been visited
-            if (graph.adjMatrix[edge][currentEdge] && !visited[currentEdge]) {
-                // If the condition is true then we're pushing the currentEdge in the queue
+        // For every vertex that the graph has
+        for (int currentVertex = q.first; currentVertex < graph.size; currentVertex++) {
+            // We're checking if there is an edge between the vertex got from the queue and the current vertex
+            // And if there is a vertex then we're checking if the current vertex has already been visited
+            if (graph.adjMatrix[vertex][currentVertex] && !visited[currentVertex]) {
+                // If the condition is true then we're pushing the currentVertex in the queue
                 // and we mark it as visited
-                pushToQueue(q, currentEdge);
-                visited[currentEdge] = true;
+                pushToQueue(q, currentVertex);
+                visited[currentVertex] = true;
             }
         }
-        // After we finish checking all the other edges with the edge got from the queue
-        // then we're gonna pop(remove) that edge from the queue and we're gonna continue
+        // After we finish checking all the other vertices with the vertex got from the queue
+        // then we're gonna pop(remove) that vertex from the queue and we're gonna continue
         // with the next one in the queue(if there is one)
         popElementFromQueue(q);
     }
@@ -112,19 +112,19 @@ void dfs(Graph &graph, int start) {
 
     // While the stack is not empty
     while (!isStackEmpty(st)) {
-        // We're getting the edge from the stack and printing it
-        int edge = getElementFromStack(st);
-        printf("%d ", edge);
+        // We're getting the vertex from the stack and printing it
+        int vertex = getElementFromStack(st);
+        printf("%d ", vertex);
         // Then since we've printed it, we no longer need it in the stack so we're removing it
         popElementFromStack(st);
-        for (int currentEdge = 0; currentEdge < graph.size; currentEdge++) {
-            // We're checking if there is a vertex between the edge got from the queue and the current edge
-            // And if there is a vertex then we're checking if the current edge has already been visited
-            if (graph.adjMatrix[edge][currentEdge] && !visited[currentEdge]) {
-                // If the condition is true then we're pushing the currentEdge in the queue
+        for (int currentVertex = 0; currentVertex < graph.size; currentVertex++) {
+            // We're checking if there is an edge between the vertex got from the queue and the current vertex
+            // And if there is a vertex then we're checking if the current vertex has already been visited
+            if (graph.adjMatrix[vertex][currentVertex] && !visited[currentVertex]) {
+                // If the condition is true then we're pushing the currentVertex in the queue
                 // and we mark it as visited
-                pushToStack(st, currentEdge);
-                visited[currentEdge] = true;
+                pushToStack(st, currentVertex);
+                visited[currentVertex] = true;
             }
         }
     }
